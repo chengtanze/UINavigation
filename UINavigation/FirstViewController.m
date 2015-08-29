@@ -1,24 +1,25 @@
 //
-//  ViewController.m
+//  FirstViewController.m
 //  UINavigation
 //
 //  Created by ciwong-huanghg on 15/8/28.
 //  Copyright (c) 2015年 Hype. All rights reserved.
 //
 
-#import "ViewController.h"
 #import "FirstViewController.h"
-
-@interface ViewController ()
+#import "SecondViewController.h"
+@interface FirstViewController ()
 
 @end
 
-@implementation ViewController
+@implementation FirstViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.title = @"First";
     
     UIButton * btn1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 100, 60, 40)];
     [btn1 addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
@@ -30,14 +31,30 @@
 }
 
 -(void)click:(id)sender{
-    FirstViewController * first = [[FirstViewController alloc]init];
-    
+    SecondViewController * first = [[SecondViewController alloc]init];
+
     [self.navigationController pushViewController:first animated:YES];
+    
+   
+    NSMutableArray * delArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    [delArray removeObject:self];
+    [self.navigationController setViewControllers:delArray animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end
